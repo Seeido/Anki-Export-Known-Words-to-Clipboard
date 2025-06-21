@@ -17,11 +17,11 @@ from anki.hooks import addHook
 MENU_ITEM_NAME = "Sync Known Words to Migaku"
 
 def deck_selection():
-    """Show a dropdown menu of all available decks for selection and validate the choice."""
+    """Show a dropdown menu to select a deck and validate it."""
     
-    NO_DECKS_MESSAGE = "No decks found in your collection."
+    NO_DECK_MESSAGE = "No decks found in your collection."
     WINDOW_TITLE = "Select Deck"
-    DECKS_SELECTION_MESSAGE = "Select a deck to sync known words from:"
+    DECK_SELECTION_MESSAGE = "Select a deck to sync known words from:"
     NO_CARDS_MESSAGE = "The selected deck has no cards. Please select a deck with cards."
     DECK_NOT_FOUND_MESSAGE = "The selected deck could not be found. Please try again."
 
@@ -29,7 +29,7 @@ def deck_selection():
     deck_names = [d['name'] for d in mw.col.decks.all()]
     
     if not deck_names:
-        showInfo(NO_DECKS_MESSAGE)
+        showInfo(NO_DECK_MESSAGE)
         return
     
     # Create the dialog
@@ -41,10 +41,10 @@ def deck_selection():
     layout = QVBoxLayout()
     
     # Add label
-    label = QLabel(DECKS_SELECTION_MESSAGE)
+    label = QLabel(DECK_SELECTION_MESSAGE)
     layout.addWidget(label)
     
-    # Create dropdown
+    # Create dropdown for selecting deck
     combo = QComboBox()
     combo.addItems(deck_names)
     layout.addWidget(combo)
