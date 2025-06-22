@@ -73,8 +73,8 @@ def extract_mature_cards(selected_deck_name, deck_id, card_count, sync_words_onl
                 'card_id': card_id
             })
         
-        # Sort by review date (most recently reviewed first)
-        mature_cards_data.sort(key=lambda x: x['review_date'], reverse=True)
+        # Sort by review date (most recently reviewed last - for Migaku auto-scroll compatibility)
+        mature_cards_data.sort(key=lambda x: x['review_date'])
         
         # Validate that we have valid word data
         valid_cards = [card for card in mature_cards_data if card['word']]
