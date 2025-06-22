@@ -10,6 +10,9 @@ from aqt import mw
 from aqt.utils import showInfo
 from aqt.qt import *
 
+# Import field mapping functionality
+from .field_mapping import field_mapping
+
 
 def sync_type_selection(selected_deck_name, deck_id, card_count):
     """Show a dialog to select sync type (words only or words + sentences)."""
@@ -74,10 +77,10 @@ def sync_type_selection(selected_deck_name, deck_id, card_count):
         sync_words_only = words_only_radio.isChecked()
         sync_type = "words only" if sync_words_only else "words and sentences"
         
-        showInfo(f"Selected sync type: {sync_type}\n(Deck: {selected_deck_name}, {card_count} cards)\n(Sync type selection complete - next step will be field mapping)")
+        # showInfo(f"Selected sync type: {sync_type}\n(Deck: {selected_deck_name}, {card_count} cards)\n(Sync type selection complete - next step will be field mapping)")
         
-        # TODO: Call the next step (field mapping) here
-        # field_mapping(selected_deck_name, deck_id, card_count, sync_words_only)
+        # Proceed to field mapping
+        field_mapping(selected_deck_name, deck_id, card_count, sync_words_only)
     else:
         return None
 
