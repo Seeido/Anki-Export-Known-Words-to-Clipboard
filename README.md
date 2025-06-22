@@ -17,45 +17,74 @@ This add-on was originally designed to sync directly to Migaku, but was changed 
 
 ## Installation
 
-### Method 1: Manual Installation
+### For Testing/Development
 
-1. Download the add-on files
-2. Extract to your Anki add-ons folder:
-   - **Windows**: `%APPDATA%\Anki2\addons21\`
-   - **macOS**: `~/Library/Application Support/Anki2/addons21/`
-   - **Linux**: `~/.local/share/Anki2/addons21/`
+1. Download the add-on files from this repository
+2. Place them in your Anki add-ons directory
+3. Restart Anki
+4. Access via Tools → Sync Known Words to Migaku
 
-### Method 2: Git Clone
+#### Quick Setup via Git Clone
+
+**Windows:**
 
 ```bash
-# Navigate to your Anki add-ons folder
+cd "%APPDATA%\Anki2\addons21\"
+git clone https://github.com/Seeido/anki-known-words-sync-to-migaku.git
+```
+
+**macOS:**
+
+```bash
 cd ~/Library/Application\ Support/Anki2/addons21/
-
-# Clone the repository
-git clone git@github.com:Seeido/Anki-Export-Known-Words-to-Clipboard.git
-
-# Or using HTTPS
-git clone https://github.com/Seeido/Anki-Export-Known-Words-to-Clipboard.git
+git clone https://github.com/Seeido/anki-known-words-sync-to-migaku.git
 ```
 
-### Method 3: Git Clone (Alternative Location)
+**Linux:**
 
 ```bash
-# Clone to a different location
-git clone git@github.com:Seeido/Anki-Export-Known-Words-to-Clipboard.git
-
-# Then copy to Anki add-ons folder
-cp -r Anki-Export-Known-Words-to-Clipboard ~/Library/Application\ Support/Anki2/addons21/
+cd ~/.local/share/Anki2/addons21/
+git clone https://github.com/Seeido/anki-known-words-sync-to-migaku.git
 ```
+
+**After cloning, restart Anki to load the add-on.**
+
+#### Removing After Testing
+
+**Windows:**
+
+```bash
+cd "%APPDATA%\Anki2\addons21\"
+rmdir /s anki-known-words-sync-to-migaku
+```
+
+**macOS:**
+
+```bash
+cd ~/Library/Application\ Support/Anki2/addons21/
+rm -rf anki-known-words-sync-to-migaku
+```
+
+**Linux:**
+
+```bash
+cd ~/.local/share/Anki2/addons21/
+rm -rf anki-known-words-sync-to-migaku
+```
+
+**After removal, restart Anki to unload the add-on.**
+
+### For Regular Users (Coming Soon)
+
+This add-on will be published on AnkiWeb with its own add-on ID for easy installation through Anki's add-on manager.
 
 ## Usage
 
-1. Restart Anki
-2. Look for "Export Known Words to Clipboard" in the Tools menu
-3. Select a deck to export from
-4. Choose export type (words only or words with sentences)
-5. Map your card fields (word field and sentence field if applicable)
-6. The words will be copied to your clipboard with instructions for pasting
+1. Look for "Export Known Words to Clipboard" in the Tools menu
+2. Select a deck to export from
+3. Choose export type (words only or words with sentences)
+4. Map your card fields (word field and sentence field if applicable)
+5. The words will be copied to your clipboard with instructions for pasting (to Migaku)
 
 ## Use Cases
 
@@ -67,4 +96,3 @@ cp -r Anki-Export-Known-Words-to-Clipboard ~/Library/Application\ Support/Anki2/
 ## Requirements
 
 - Anki 2.1.50 or later
-- No additional dependencies required
