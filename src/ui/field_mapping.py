@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-# Copyright: Ankitects Pty Ltd and contributors
-# License: GNU AGPL, version 3 or later; http://www.gnu.org/licenses/agpl.html
 
 """
 UI dialogs for field mapping selection.
@@ -9,9 +7,6 @@ UI dialogs for field mapping selection.
 from aqt import mw
 from aqt.utils import showInfo
 from aqt.qt import *
-
-# Import core functionality
-from ..core.card_extractor import extract_mature_cards
 
 
 def field_mapping(selected_deck_name, deck_id, card_count, sync_words_only):
@@ -138,9 +133,7 @@ def field_mapping(selected_deck_name, deck_id, card_count, sync_words_only):
                 showInfo(FIELD_NOT_FOUND_MESSAGE)
                 return None
             
-            # Proceed to extracting mature cards
-            extract_mature_cards(selected_deck_name, deck_id, card_count, sync_words_only, selected_word_field, selected_sentence_field)
-            
+            # Return the result instead of calling the next step
             return {
                 'word_field': selected_word_field,
                 'sentence_field': selected_sentence_field

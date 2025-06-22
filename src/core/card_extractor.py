@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-# Copyright: Ankitects Pty Ltd and contributors
-# License: GNU AGPL, version 3 or later; http://www.gnu.org/licenses/agpl.html
 
 """
 Core functionality for extracting mature cards and their field values.
@@ -85,29 +83,11 @@ def extract_mature_cards(selected_deck_name, deck_id, card_count, sync_words_onl
             showInfo("No mature cards with valid word data found.\n\nPlease ensure the selected word field contains data.")
             return None
         
-        # Show extraction results
-        total_mature = len(mature_cards_data)
-        total_valid = len(valid_cards)
-        sync_type = "words only" if sync_words_only else "words and sentences"
-        
-        result_message = f"Extraction complete!\n\n"
-        result_message += f"Found {total_mature} mature cards\n"
-        result_message += f"Valid cards with word data: {total_valid}\n"
-        result_message += f"Sync type: {sync_type}\n"
-        result_message += f"Word field: {word_field}"
-        
-        if not sync_words_only:
-            result_message += f"\nSentence field: {sentence_field}"
-        
-        result_message += f"\n\n(Extraction complete - next step will be Migaku window check)"
-        
-        showInfo(result_message)
-        
         # Return the extracted data for the next step
         return {
             'cards': valid_cards,
-            'total_mature': total_mature,
-            'total_valid': total_valid,
+            'total_mature': len(mature_cards_data),
+            'total_valid': len(valid_cards),
             'sync_words_only': sync_words_only,
             'word_field': word_field,
             'sentence_field': sentence_field

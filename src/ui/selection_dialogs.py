@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-# Copyright: Ankitects Pty Ltd and contributors
-# License: GNU AGPL, version 3 or later; http://www.gnu.org/licenses/agpl.html
 
 """
 UI dialogs for deck and sync type selection.
@@ -10,15 +8,12 @@ from aqt import mw
 from aqt.utils import showInfo
 from aqt.qt import *
 
-# Import field mapping functionality
-from .field_mapping import field_mapping
-
 
 def sync_type_selection(selected_deck_name, deck_id, card_count):
-    """Show a dialog to select sync type (words only or words + sentences)."""
+    """Show a dialog to select export type (words only or words + sentences)."""
     
-    WINDOW_TITLE = "Select Sync Type"
-    SYNC_TYPE_MESSAGE = "Choose what to sync to Migaku from mature cards:"
+    WINDOW_TITLE = "Select Export Type"
+    SYNC_TYPE_MESSAGE = "Choose what to export to clipboard from mature cards:"
     WORDS_ONLY_TEXT = "Words only"
     WORDS_AND_SENTENCES_TEXT = "Words and sentences (to match Migaku Memory's behavior)"
     
@@ -75,10 +70,12 @@ def sync_type_selection(selected_deck_name, deck_id, card_count):
     # Show dialog and get result
     if dialog.exec() == QDialog.DialogCode.Accepted:
         sync_words_only = words_only_radio.isChecked()
-        sync_type = "words only" if sync_words_only else "words and sentences"
         
-        # Proceed to field mapping
-        field_mapping(selected_deck_name, deck_id, card_count, sync_words_only)
+        # Return the result instead of calling the next step
+        return {
+            'sync_words_only': sync_words_only,
+            'sync_type': "words only" if sync_words_only else "words and sentences"
+        }
     else:
         return None
 
@@ -88,7 +85,7 @@ def deck_selection():
     
     NO_DECK_MESSAGE = "No decks found in your collection."
     WINDOW_TITLE = "Select Deck"
-    DECK_SELECTION_MESSAGE = "Select a deck to sync known words from:"
+    DECK_SELECTION_MESSAGE = "Select a deck to export known words from:"
     NO_CARDS_MESSAGE = "The selected deck has no cards. Please select a deck with cards."
     DECK_NOT_FOUND_MESSAGE = "The selected deck could not be found. Please try again."
 
@@ -97,7 +94,7 @@ def deck_selection():
     
     if not deck_names:
         showInfo(NO_DECK_MESSAGE)
-        return
+        return None
     
     # Create the dialog
     dialog = QDialog(mw)
@@ -146,17 +143,23 @@ def deck_selection():
             
             if deck_id is None:
                 showInfo(DECK_NOT_FOUND_MESSAGE)
-                return
+                return None
             
             # Check if the deck has any cards
             card_count = mw.col.decks.card_count(deck_id, include_subdecks=True)
             if card_count == 0:
                 showInfo(NO_CARDS_MESSAGE)
-                return
+                return None
             
-            # Proceed directly to sync type selection
-            sync_type_selection(selected_deck_name, deck_id, card_count)
+            # Return the result instead of calling the next step
+            return {
+                'deck_name': selected_deck_name,
+                'deck_id': deck_id,
+                'card_count': card_count
+            }
             
         except Exception as e:
             showInfo(f"Error validating deck: {str(e)}")
-            return 
+            return None
+    else:
+        return None 
