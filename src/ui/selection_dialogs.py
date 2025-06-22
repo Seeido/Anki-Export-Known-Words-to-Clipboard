@@ -77,8 +77,6 @@ def sync_type_selection(selected_deck_name, deck_id, card_count):
         sync_words_only = words_only_radio.isChecked()
         sync_type = "words only" if sync_words_only else "words and sentences"
         
-        # showInfo(f"Selected sync type: {sync_type}\n(Deck: {selected_deck_name}, {card_count} cards)\n(Sync type selection complete - next step will be field mapping)")
-        
         # Proceed to field mapping
         field_mapping(selected_deck_name, deck_id, card_count, sync_words_only)
     else:

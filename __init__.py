@@ -25,12 +25,17 @@ from src.ui.selection_dialogs import deck_selection
 MENU_ITEM_NAME = "Sync Known Words to Migaku"
 
 def setup_menu():
-    """Set up the add-on menu item."""
-    # Create the menu action
+    """Set up the add-on menu item, removing any existing one to prevent duplicates."""
+    # Remove existing action to avoid creating duplicates when switching profiles
+    for action in mw.form.menuTools.actions():
+        if action.text() == MENU_ITEM_NAME:
+            mw.form.menuTools.removeAction(action)
+    
+    # Create the new menu action
     action = QAction(MENU_ITEM_NAME, mw)
     action.triggered.connect(deck_selection)
     
-    # Add to the tools menu
+    # Add it to the tools menu
     mw.form.menuTools.addAction(action)
 
 # Set up the menu when Anki starts

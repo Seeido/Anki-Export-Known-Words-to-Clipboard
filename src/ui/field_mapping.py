@@ -10,6 +10,9 @@ from aqt import mw
 from aqt.utils import showInfo
 from aqt.qt import *
 
+# Import core functionality
+from ..core.card_extractor import extract_mature_cards
+
 
 def field_mapping(selected_deck_name, deck_id, card_count, sync_words_only):
     """Show a dialog to select field mappings for word and sentence extraction."""
@@ -46,7 +49,7 @@ def field_mapping(selected_deck_name, deck_id, card_count, sync_words_only):
             try:
                 card_ids = mw.col.decks.cids(deck_id, children=True)
                 if card_ids:
-                    first_card = mw.col.getCard(card_ids[0])
+                    first_card = mw.col.get_card(card_ids[0])
                     if first_card:
                         note_type_id = first_card.note().mid
             except Exception:
@@ -135,16 +138,8 @@ def field_mapping(selected_deck_name, deck_id, card_count, sync_words_only):
                 showInfo(FIELD_NOT_FOUND_MESSAGE)
                 return None
             
-            # Show confirmation
-            sync_type = "words only" if sync_words_only else "words and sentences"
-            field_info = f"Word field: {selected_word_field}"
-            if not sync_words_only:
-                field_info += f"\nSentence field: {selected_sentence_field}"
-            
-            showInfo(f"Field mapping complete:\n{field_info}\n(Sync type: {sync_type})\n(Field mapping complete - next step will be extracting mature cards)")
-            
-            # TODO: Call the next step (extract mature cards) here
-            # extract_mature_cards(selected_deck_name, deck_id, card_count, sync_words_only, selected_word_field, selected_sentence_field)
+            # Proceed to extracting mature cards
+            extract_mature_cards(selected_deck_name, deck_id, card_count, sync_words_only, selected_word_field, selected_sentence_field)
             
             return {
                 'word_field': selected_word_field,
