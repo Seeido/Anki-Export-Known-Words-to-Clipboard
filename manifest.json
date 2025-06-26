@@ -1,0 +1,12 @@
+{
+  "name": "Export Known Words to Clipboard",
+  "package": "export_known_words_to_clipboard",
+  "description": "Export known words from mature Anki cards to clipboard for easy pasting into Migaku, spreadsheets, or text editors.",
+  "homepage": "https://github.com/Seeido/Anki-Export-Known-Words-to-Clipboard",
+  "mod": 0,
+  "min_point_version": 50,
+  "max_point_version": 0,
+  "branch_index": 0,
+  "branch": "2.1",
+  "conflicts": []
+}
