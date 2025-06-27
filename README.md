@@ -74,9 +74,19 @@ rm -rf anki-known-words-sync-to-migaku
 
 **After removal, restart Anki to unload the add-on.**
 
-### For Regular Users (Coming Soon)
+### For Regular Users
 
-This add-on will be published on AnkiWeb with its own add-on ID for easy installation through Anki's add-on manager.
+This add-on is available on AnkiWeb for easy installation:
+
+1. Open Anki
+2. Go to Tools → Add-ons
+3. Click "Get Add-ons"
+4. Enter the add-on code: **1775829374**
+5. Click "OK" and restart Anki when prompted
+
+**Add-on ID:** `1775829374`
+
+**AnkiWeb URL:** [Export Known Words to Clipboard](https://ankiweb.net/shared/info/1775829374)
 
 ## Usage
 
